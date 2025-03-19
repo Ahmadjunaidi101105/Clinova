@@ -1,0 +1,77 @@
+// Clinova - Web Company Profile untuk jual beli mobil Innova
+
+// Data Produk (Mobil Innova yang dijual)
+const cars = [
+    { id: 1, name: "Toyota Innova G", year: 2022, price: 350000000, image: "innova-g.jpg" },
+    { id: 2, name: "Toyota Innova V", year: 2023, price: 400000000, image: "innova-v.jpg" },
+    { id: 3, name: "Toyota Innova Venturer", year: 2024, price: 450000000, image: "innova-venturer.jpg" }
+];
+
+// Data Testimoni Pelanggan
+const testimonials = [
+    { name: "Andi", comment: "Pelayanan sangat baik, mobil sesuai harapan!" },
+    { name: "Rina", comment: "Harga terbaik dan pengiriman cepat!" },
+    { name: "Budi", comment: "Proses mudah dan terpercaya." }
+];
+
+// Fungsi untuk menampilkan daftar mobil
+function displayCars() {
+    const carList = document.getElementById("car-list");
+    carList.innerHTML = "";
+    
+    cars.forEach(car => {
+        const carItem = document.createElement("div");
+        carItem.classList.add("car-item");
+        carItem.innerHTML = `
+            <img src="${car.image}" alt="${car.name}" class="car-image">
+            <h3>${car.name}</h3>
+            <p>Tahun: ${car.year}</p>
+            <p>Harga: Rp ${car.price.toLocaleString()}</p>
+            <button onclick="buyCar(${car.id})">Beli Sekarang</button>
+        `;
+        carList.appendChild(carItem);
+    });
+}
+
+// Fungsi untuk membeli mobil
+function buyCar(id) {
+    const car = cars.find(c => c.id === id);
+    if (car) {
+        alert(`Anda telah memilih ${car.name}. Hubungi kami untuk informasi lebih lanjut.`);
+    }
+}
+
+// Fungsi untuk menampilkan testimoni pelanggan
+function displayTestimonials() {
+    const testimonialList = document.getElementById("testimonial-list");
+    testimonialList.innerHTML = "";
+    
+    testimonials.forEach(testimonial => {
+        const testimonialItem = document.createElement("div");
+        testimonialItem.classList.add("testimonial-item");
+        testimonialItem.innerHTML = `
+            <p>"${testimonial.comment}"</p>
+            <h4>- ${testimonial.name}</h4>
+        `;
+        testimonialList.appendChild(testimonialItem);
+    });
+}
+
+// Fungsi untuk menghubungi admin
+function contactUs() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+    
+    if (name && email && message) {
+        alert(`Terima kasih, ${name}. Kami akan segera menghubungi Anda!`);
+    } else {
+        alert("Mohon isi semua data dengan benar!");
+    }
+}
+
+// Menjalankan fungsi saat halaman dimuat
+document.addEventListener("DOMContentLoaded", () => {
+    displayCars();
+    displayTestimonials();
+});
